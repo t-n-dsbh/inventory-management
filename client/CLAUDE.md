@@ -482,3 +482,5 @@ src/
 **Filters:** Composable → refs → watch for changes
 **Keys:** Always use unique IDs, never array index
 **API calls:** Centralize in api.js, wrap in try/catch
+
+Always document non-obvious logic changes with comments

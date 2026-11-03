@@ -99,6 +99,25 @@ export const api = {
     return response.data
   },
 
+  async getRestockingRecommendations(budget) {
+    const params = new URLSearchParams()
+    // Budget is optional; omit it to get all candidates plus max_budget
+    if (budget !== undefined && budget !== null) params.append('budget', budget)
+
+    const response = await axios.get(`${API_BASE_URL}/restocking/recommendations?${params.toString()}`)
+    return response.data
+  },
+
+  async placeRestockingOrder(items) {
+    const response = await axios.post(`${API_BASE_URL}/restocking/orders`, { items })
+    return response.data
+  },
+
+  async getSubmittedOrders() {
+    const response = await axios.get(`${API_BASE_URL}/orders/submitted`)
+    return response.data
+  },
+
   async getPurchaseOrderByBacklogItem(backlogItemId) {
     const response = await axios.get(`${API_BASE_URL}/purchase-orders/${backlogItemId}`)
     return response.data
