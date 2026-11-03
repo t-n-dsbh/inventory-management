@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# Read-only token: CI only checks out code and runs tests
+permissions:
+  contents: read
+
+# Cancel superseded runs for the same branch/PR
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  backend:
+    name: Backend tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v5
+
+      - name: Install dependencies
+        working-directory: server
+        run: uv sync --frozen
+
+      # Run from server/ so uv uses the server project environment; tests live in ../tests
+      - name: Run pytest
+        working-directory: server
+        run: uv run pytest ../tests/backend
+
+  frontend:
+    name: Frontend build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # npm install, not npm ci: client/package-lock.json is intentionally gitignored
+      # (keeps local registry URLs out of the public repo), and client/.npmrc pins the public registry
+      - name: Install dependencies
+        working-directory: client
+        run: npm install
+
+      - name: Build
+        working-directory: client
+        run: npm run build
