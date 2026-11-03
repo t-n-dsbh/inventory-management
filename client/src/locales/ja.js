@@ -6,6 +6,8 @@ export default {
     orders: '注文',
     finance: '財務',
     demandForecast: '需要予測',
+    restocking: '補充発注',
+    reports: 'レポート',
     companyName: '触媒コンポーネンツ',
     subtitle: '在庫管理システム'
   },
@@ -126,6 +128,49 @@ export default {
       status: 'ステータス',
       expectedDelivery: '予定配達日',
       actualDelivery: '実際の配達日'
+    },
+    submittedOrders: {
+      title: '発注済みの注文',
+      description: 'サプライヤーに発注した補充注文（フィルターの影響を受けません）',
+      orderNumber: '注文番号',
+      submittedDate: '発注日',
+      leadTime: 'リードタイム',
+      expectedDelivery: '予定納品日',
+      days: '{count}日',
+      empty: '発注済みの補充注文はまだありません',
+      total: '合計'
+    }
+  },
+
+  // 補充
+  restocking: {
+    title: '補充発注',
+    description: '在庫不足品目の推奨購入を確認し、予算内で補充注文を行います',
+    budget: '予算',
+    budgetLabel: '補充予算',
+    maxBudget: '上限: {amount}',
+    recommendations: '推奨品目',
+    selectedTotal: '選択合計',
+    ofBudget: '予算 {amount} のうち',
+    itemsSelected: '{total}件中{selected}件を選択',
+    selectAll: 'すべての品目を選択',
+    selectItem: '{name}を選択',
+    placeOrder: '注文する',
+    submitting: '送信中...',
+    updating: '推奨を更新中...',
+    empty: 'この予算では推奨品目を購入できません。予算を増やしてください。',
+    orderSuccess: '注文 {orderNumber} を送信しました',
+    orderSuccessDetail: '予定納品日: {date}',
+    viewOrders: '注文を表示',
+    loadError: '補充の推奨を読み込めませんでした',
+    orderError: '注文を送信できませんでした',
+    table: {
+      item: '品目',
+      category: 'カテゴリ',
+      shortfall: '不足数',
+      unitCost: '単価',
+      lineCost: '小計',
+      leadTime: 'リードタイム（日）'
     }
   },
 
@@ -204,6 +249,7 @@ export default {
     shipped: '出荷済み',
     processing: '処理中',
     backordered: 'バックオーダー',
+    submitted: '発注済み',
     inStock: '在庫あり',
     lowStock: '在庫僅少',
     adequate: '適量'
