@@ -24,9 +24,10 @@ jobs:
 
       - uses: astral-sh/setup-uv@v5
 
+      # No --frozen: server/uv.lock is gitignored (*.lock), so uv resolves dependencies fresh each run
       - name: Install dependencies
         working-directory: server
-        run: uv sync --frozen
+        run: uv sync
 
       # Run from server/ so uv uses the server project environment; tests live in ../tests
       - name: Run pytest
